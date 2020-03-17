@@ -59,6 +59,25 @@ https://www.youtube.com/playlist?list=PLT9miexWCpPUQkQwL-COHmo0Jd0qxLjTn
 
 ## <a name="parte2">2 - Wordpress Plugin Comment Section</a>
 
+- https://www.youtube.com/watch?v=MKsHl_-rqw
+
+- wp-content/plugins/custom-plugin/custom-plugin.php
+
+```php
+<?php
+/*
+ Plugin Name: Custom Plugin
+ Plugin URI: https://josemalcher.net
+ Description: Plugin de Estudos
+ Version: 1.0
+ Author: José Malcher Jr
+ Author URI: https://josemalcher.net
+ License: GPL2
+ */
+
+
+```
+
 
 
 [Voltar ao Índice](#indice)

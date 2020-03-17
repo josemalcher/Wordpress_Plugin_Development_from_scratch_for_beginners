@@ -114,6 +114,7 @@ xmlrpc.php
 wp-content/languages/*
 wp-content/mu-plugins/
 !wp-content/plugins/wp-next-plugin/*
+!wp-content/plugins/custom-plugin/*
 !wp-content/plugins/
 !wp-content/themes/
 wp-admin/*
@@ -151,3 +152,4 @@ node_modules/
 /wp-content/upgrade/
 /wp-content/uploads/
 /wp-content/plugins/wp-next-plugin/
+/wp-content/plugins/Noticias_Antigas_FNC/
