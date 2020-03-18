@@ -9,7 +9,6 @@
  License: GPL2
  */
 
-/** Step 1. */
 function add_my_custom_menu() {
 	add_menu_page(
 		'Custom Plugin',
@@ -18,13 +17,35 @@ function add_my_custom_menu() {
 		'custom-plugin',
 		'custom_plugin_callback_function',
 		"dashicons-dashboard",
-	11);
+		11 );
+	add_submenu_page(
+		"custom-plugin",
+		"Add New",
+		"Add New",
+		"manage_options",
+		"add-new",
+		"add_new_function"
+	);
+	add_submenu_page(
+		"custom-plugin",
+		"All Pages",
+		"All Pages",
+		"manage_options",
+		"all-page",
+		"list_function"
+	);
 }
 
-/** Step 2 (from text above). */
 add_action( 'admin_menu', 'add_my_custom_menu' );
 
-/** Step 3. */
 function custom_plugin_callback_function() {
 	echo "<h1>Título</h1>";
+}
+
+function add_new_function(){
+	echo "<h1>Add New</h1>";
+}
+
+function list_function(){
+	echo "<h1>List's</h1>";
 }
