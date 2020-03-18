@@ -9,13 +9,16 @@
  License: GPL2
  */
 
+define("PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
+define("PLUGIN_URL",      plugins_url(__FILE__));
+
 function add_my_custom_menu() {
 	add_menu_page(
-		'Custom Plugin',
+		'customplugin',
 		'Custom Plugin',
 		'manage_options',
 		'custom-plugin',
-		'custom_plugin_callback_function',
+		'list_function',
 		"dashicons-dashboard",
 		11 );
 	add_submenu_page(
@@ -31,21 +34,17 @@ function add_my_custom_menu() {
 		"All Pages",
 		"All Pages",
 		"manage_options",
-		"all-page",
+		"list_function",
 		"list_function"
 	);
 }
 
 add_action( 'admin_menu', 'add_my_custom_menu' );
 
-function custom_plugin_callback_function() {
-	echo "<h1>Título</h1>";
-}
-
 function add_new_function(){
-	echo "<h1>Add New</h1>";
+	include_once PLUGIN_DIR_PATH."/views/add-new.php";
 }
 
 function list_function(){
-	echo "<h1>List's</h1>";
+	include_once PLUGIN_DIR_PATH."/views/all-page.php";
 }
