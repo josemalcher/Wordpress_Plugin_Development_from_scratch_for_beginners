@@ -10,7 +10,7 @@
  */
 
 define("PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
-define("PLUGIN_URL",      plugins_url(__FILE__));
+define("PLUGIN_URL",      plugins_url());
 
 function add_my_custom_menu() {
 	add_menu_page(

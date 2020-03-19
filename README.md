@@ -213,7 +213,23 @@ function add_new_function(){
 
 ## <a name="parte6">6 - Link Asset Files to Wordpress Plugin</a>
 
+1. Make folders to contain CSS, JS, Images, Font families, Plugin PHP files etc.
+2. All assets you can further move into /custom-plgin/assets/
+3. And All php views files we can put into /custom-plugin/views/
 
+- wp-content/plugins/custom-plugin/views/all-page.php
+
+```php
+<link rel="stylesheet" href="<?=PLUGIN_URL.'/custom-plugin/assets/css/style.css';?>">
+
+<?php
+	echo "<h1>List All</h1>";
+	
+?>
+
+<script src="<?=PLUGIN_URL.'/custom-plugin/assets/js/script.js';?>"></script>
+
+```
 
 [Voltar ao Índice](#indice)
 
