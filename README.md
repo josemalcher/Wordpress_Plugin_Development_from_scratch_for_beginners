@@ -190,6 +190,20 @@ function add_new_function(){
 
 - https://www.youtube.com/watch?v=XBpXbZVYr8M
 
+```php
+
+define("PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
+define("PLUGIN_URL",      plugins_url(__FILE__));
+
+function list_function(){
+	include_once PLUGIN_DIR_PATH."/views/all-page.php";
+}
+
+function add_new_function(){
+	include_once PLUGIN_DIR_PATH."/views/add-new.php";
+}
+
+```
 
 
 [Voltar ao Índice](#indice)
