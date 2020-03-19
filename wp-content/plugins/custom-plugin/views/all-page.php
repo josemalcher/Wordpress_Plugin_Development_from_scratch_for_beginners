@@ -1,4 +1,4 @@
 <?php
 
-echo "<h1>List's</h1>";
+echo "<h1>List All</h1>";
 
