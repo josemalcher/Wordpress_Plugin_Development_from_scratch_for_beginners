@@ -1,1 +1,1 @@
-console.log("Loading...WP - CUstom Plugin");
+console.log("Loading...WP - CUstom Plugin...with WP_enqueue");

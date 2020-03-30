@@ -11,6 +11,7 @@
 
 define("PLUGIN_DIR_PATH", plugin_dir_path(__FILE__));
 define("PLUGIN_URL",      plugins_url());
+define("PLUGIN_VERSION", "1.0");
 
 function add_my_custom_menu() {
 	add_menu_page(
@@ -47,4 +48,23 @@ function list_function(){
 function add_new_function(){
 	include_once PLUGIN_DIR_PATH."/views/add-new.php";
 }
+
+function custon_plugin_assets(){
+	// css files
+	wp_enqueue_style(
+		"cpl_style", // unique name for CSS file
+		PLUGIN_URL."/custom-plugin/assets/css/style.css",
+	'', // Dependecy on outher files
+	PLUGIN_VERSION
+	); // CSS file path
+
+	wp_enqueue_script(
+		"cpl_script",
+		PLUGIN_URL. "/custom-plugin/assets/js/script.js",
+	'',
+	PLUGIN_VERSION,
+	true // in footer
+	);
+}
+add_action("init", "custon_plugin_assets");
 

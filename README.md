@@ -238,6 +238,36 @@ function add_new_function(){
 
 ## <a name="parte7">7 - Link Js, CSS, Images to Plugin file</a>
 
+- https://developer.wordpress.org/reference/functions/wp_enqueue_style/
+
+```
+wp_enqueue_style - CSS
+wp_enqueue_script - Script
+
+add_action("wp_enqueue_scripts", "function") 
+
+```
+
+```php
+function custon_plugin_assets(){
+	// css files
+	wp_enqueue_style(
+		"cpl_style", // unique name for CSS file
+		PLUGIN_URL."/custom-plugin/assets/css/style.css",
+	'', // Dependecy on outher files
+	PLUGIN_VERSION
+	); // CSS file path
+
+	wp_enqueue_script(
+		"cpl_script",
+		PLUGIN_URL. "/custom-plugin/assets/js/script.js",
+	'',
+	PLUGIN_VERSION,
+	true // in footer
+	);
+}
+add_action("init", "custon_plugin_assets");
+```
 
 
 [Voltar ao Índice](#indice)
