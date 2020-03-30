@@ -364,7 +364,19 @@ register_activation_hook(__FILE__,"create_page");
 
 ## <a name="parte11">11 - Delete Wordpress page by Plugin</a>
 
+```php
+//register id in wp-option
+$post_id = wp_insert_post( $page ); // post_id as return value
+add_option( "custom_plugin_page_id", $post_id );  // wp_options table from the name of custom_plugin_page_id
 
+//delete page
+$the_post_id = get_option( "custom_plugin_page_id" );
+if ( ! empty( $the_post_id ) ) {
+    wp_delete_post( $the_post_id, true );
+}
+
+
+```
 
 [Voltar ao Índice](#indice)
 

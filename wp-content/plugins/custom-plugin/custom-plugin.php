@@ -99,6 +99,12 @@ function deactivate_table() {
 	global $wpdb;
 	$wpdb->query( "DROP table IF Exists wp_custom_plugin" );
 
+	//delete page
+	$the_post_id = get_option( "custom_plugin_page_id" );
+	if ( ! empty( $the_post_id ) ) {
+		wp_delete_post( $the_post_id, true );
+	}
+
 }
 
 //If we want to delete table while deactivates then we should use
@@ -107,17 +113,19 @@ register_deactivation_hook( __FILE__, "deactivate_table" );
 // If we want to delete then we have to change action hook,
 //register_uninstall_hook( __FILE__, "deactivate_table" );
 
-function create_page(){
+function create_page() {
 	// code for create page
-$page = array();
-   $page['post_title']= "Custom Plugin Online Web Tutor";
-   $page['post_content']= "Learning Platform for Wordpress Customization for Themes, Plugin and Widgets";
-   $page['post_status'] = "publish";
-   $page['post_slug'] = "custom-plugin-online-web-tutor";
-   $page['post_type'] = "page";
+	$page                 = array();
+	$page['post_title']   = "Custom Plugin Online Web Tutor";
+	$page['post_content'] = "Learning Platform for Wordpress Customization for Themes, Plugin and Widgets";
+	$page['post_status']  = "publish";
+	$page['post_slug']    = "custom-plugin-online-web-tutor";
+	$page['post_type']    = "page";
 
-  wp_insert_post($page); // post_id as return value
+	$post_id = wp_insert_post( $page ); // post_id as return value
+
+	add_option( "custom_plugin_page_id", $post_id );  // wp_options table from the name of custom_plugin_page_id
 
 }
 
-register_activation_hook(__FILE__,"create_page");
+register_activation_hook( __FILE__, "create_page" );
