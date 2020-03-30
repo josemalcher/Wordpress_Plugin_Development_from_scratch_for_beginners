@@ -520,13 +520,13 @@ add_action("wo_ajax_custom_plugin_library", "add_custom_plugin_library_2");
 - https://codex.wordpress.org/Class_Reference/wpdb
 
 ```
-$wpdb-query(" CUSTOM_QUERY FOR INSERT/UPDATE/DELETE ")
+$wpdb->query(" CUSTOM_QUERY FOR INSERT/UPDATE/DELETE ")
   
-$wpdb-insert("TABLE_NAME","DATA")
+$wpdb->insert("TABLE_NAME","DATA")
  
-$wpdb-udpate("TABLE_NAME","DATA");
+$wpdb->udpate("TABLE_NAME","DATA");
   
-$wpdb-delete("TABLE_NAME","DATA");
+$wpdb->delete("TABLE_NAME","DATA");
 
 ```
 
@@ -537,6 +537,34 @@ $wpdb-delete("TABLE_NAME","DATA");
 
 ## <a name="parte16">16 - Insert data to Wordpress Database</a>
 
+- 1. wpdb::insert( ‘table’, array( ‘column’ = ‘foo’, ‘field’ = ‘bar’ ) ) 
+- 2. wpdb::insert( ‘table’, array( ‘column’ = ‘foo’, ‘field’ = 1337 ), array( ‘%s’, ‘%d’ ) )
+
+```php
+<?php
+//simple insert operation on page refresh
+global $wpdb;
+
+/*
+$wpdb->insert(
+	"wp_custom_plugin",
+	array(
+		"name"  => "José",
+		"email" => "email@jose.com.br",
+		"phone" => "91980809922",
+	)
+)
+*/
+
+$wpdb->query(
+        $wpdb->prepare(
+                "  INSERT INTO wp_custom_plugin (name, email, phone) VALUES ('%s', '%s', '%s')",
+                "Jose Prepare", "jose@prepare.com.br","919988776"
+        )
+);
+
+?>
+```
 
 
 [Voltar ao Índice](#indice)
