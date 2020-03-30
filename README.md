@@ -337,7 +337,25 @@ register_deactivation_hook( __FILE__, "deactivate_table" );
 
 ## <a name="parte10">10 - Wordpress Page on plugin activation</a>
 
+- https://developer.wordpress.org/reference/functions/wp_insert_post/
 
+```php
+
+function create_page(){
+	// code for create page
+$page = array();
+   $page['post_title']= "Custom Plugin Online Web Tutor";
+   $page['post_content']= "Learning Platform for Wordpress Customization for Themes, Plugin and Widgets";
+   $page['post_status'] = "publish";
+   $page['post_slug'] = "custom-plugin-online-web-tutor";
+   $page['post_type'] = "page";
+
+  wp_insert_post($page); // post_id as return value
+
+}
+
+register_activation_hook(__FILE__,"create_page");
+```
 
 [Voltar ao Índice](#indice)
 
