@@ -385,6 +385,31 @@ if ( ! empty( $the_post_id ) ) {
 
 ## <a name="parte12">12 - Custom JavaScript on Wordpress page</a>
 
+- https://developer.wordpress.org/reference/functions/wp_localize_script/
+
+- https://developer.wordpress.org/reference/functions/admin_url/
+
+```php
+// (...)
+	$objecto_array = array("name"=> "José Malcher jr",
+	                       "site"=>"wwww.josemalcher.net",
+						   "ajaxurl", admin_url("admin-ajax.php"));
+	wp_localize_script("cpl_script", "online_web_tutor", $objecto_array);
+}
+add_action( "init", "custon_plugin_assets" );
+
+function myJScode(){
+	?>
+<script type="text/javascript">
+	//alert("Ola alert"); //in template front
+	let on_line_tutor = {"admin_url": " <?=admin_url('admin-ajax.php'); ?> "}
+	console.log(on_line_tutor);
+</script>
+<?php
+}
+add_action("wp_head", "myJScode");
+
+```
 
 
 [Voltar ao Índice](#indice)

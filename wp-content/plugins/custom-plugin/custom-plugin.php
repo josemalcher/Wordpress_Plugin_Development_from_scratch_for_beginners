@@ -66,9 +66,25 @@ function custon_plugin_assets() {
 		PLUGIN_VERSION,
 		true // in footer
 	);
-}
 
+	$objecto_array = array("name"=> "José Malcher jr",
+	                       "site"=>"wwww.josemalcher.net",
+						   "ajaxurl", admin_url("admin-ajax.php"));
+	wp_localize_script("cpl_script", "online_web_tutor", $objecto_array);
+}
 add_action( "init", "custon_plugin_assets" );
+
+function myJScode(){
+	?>
+<script type="text/javascript">
+	//alert("Ola alert"); //in template front
+	let on_line_tutor = {"admin_url": " <?=admin_url('admin-ajax.php'); ?> "}
+	console.log(on_line_tutor);
+</script>
+<?php
+}
+add_action("wp_head", "myJScode");
+
 
 function custom_plugin_tables() {
 	global $wpdb;
