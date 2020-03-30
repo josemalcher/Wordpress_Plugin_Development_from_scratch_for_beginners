@@ -67,24 +67,48 @@ function custon_plugin_assets() {
 		true // in footer
 	);
 
-	$objecto_array = array("name"=> "José Malcher jr",
+	/*$objecto_array = array("name"=> "José Malcher jr",
 	                       "site"=>"wwww.josemalcher.net",
-						   "ajaxurl", admin_url("admin-ajax.php"));
-	wp_localize_script("cpl_script", "online_web_tutor", $objecto_array);
+						   "ajaxurl", admin_url("admin-ajax.php"));*/
+
+	//wp_localize_script("cpl_script", "online_web_tutor", $objecto_array);
+
+	wp_localize_script( "cpl_script", "ajaxurl", admin_url( "admin-ajax.php" ) );
+
 }
+
 add_action( "init", "custon_plugin_assets" );
 
-function myJScode(){
-	?>
-<script type="text/javascript">
-	//alert("Ola alert"); //in template front
-	let on_line_tutor = {"admin_url": " <?=admin_url('admin-ajax.php'); ?> "}
-	console.log(on_line_tutor);
-</script>
-<?php
+if ( isset( $_REQUEST['action'] ) ) { // it checks the action param is set or not
+	switch ( $_REQUEST['action'] ) {  // if set pass to switch method to match case
+		case "custom_plugin_library":
+			add_action( "admin_init", "add_custom_plugin_library" );
+			function add_custom_plugin_library() { // function attached with the action hook
+				global $wpdb;
+				include_once PLUGIN_DIR_PATH . "/library/custom-plugin-lib.php"; // ajax handler file within /library folder
+			}
+			break;
+	}
 }
-add_action("wp_head", "myJScode");
 
+/*
+ // Sugestão no comentário do vídeo
+function add_custom_plugin_library_2(){
+	global $wpdb;
+
+	if(isset($_POST['action'])){
+		switch ($_POST['action']){
+			case "add_custom_plugin_library_2":
+				global $wpdb;
+				include_once PLUGIN_DIR_PATH . "/library/custom-plugin-lib.php"; // ajax handler file within /library folder
+				break;
+		}
+	}
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action("wo_ajax_custom_plugin_library", "add_custom_plugin_library_2");
+
+*/
 
 function custom_plugin_tables() {
 	global $wpdb;

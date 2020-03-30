@@ -419,7 +419,39 @@ add_action("wp_head", "myJScode");
 
 ## <a name="parte13">13 - Simple Ajax Request in Wordpress</a>
 
+```php
+if ( isset( $_REQUEST['action'] ) ) { // it checks the action param is set or not
+	switch ( $_REQUEST['action'] ) {  // if set pass to switch method to match case
+		case "custom_plugin_library":
+			add_action( "admin_init", "add_custom_plugin_library" );
+			function add_custom_plugin_library() { // function attached with the action hook
+				global $wpdb;
+				include_once PLUGIN_DIR_PATH . "/library/custom-plugin-lib.php"; // ajax handler file within /library folder
+			}
 
+			break;
+	}
+}
+
+/*
+ // Sugestão no comentário do vídeo
+function add_custom_plugin_library_2(){
+	global $wpdb;
+
+	if(isset($_POST['action'])){
+		switch ($_POST['action']){
+			case "add_custom_plugin_library_2":
+				global $wpdb;
+				include_once PLUGIN_DIR_PATH . "/library/custom-plugin-lib.php"; // ajax handler file within /library folder
+				break;
+		}
+	}
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+add_action("wo_ajax_custom_plugin_library", "add_custom_plugin_library_2");
+
+*/
+```
 
 [Voltar ao Índice](#indice)
 
