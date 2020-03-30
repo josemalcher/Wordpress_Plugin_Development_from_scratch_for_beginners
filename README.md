@@ -460,6 +460,54 @@ add_action("wo_ajax_custom_plugin_library", "add_custom_plugin_library_2");
 
 ## <a name="parte14">14 - Post Form data in Wordpress Plugin</a>
 
+- wp-content/plugins/custom-plugin/views/add-new.php
+
+```html
+<h2>Form AJAX</h2>
+<hr>
+<form action="#" id="form_custom_add">
+    <table class="form-table">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="input_name">Name</label></th>
+            <td><input required name="input_name" type="text" id="input_name" value="" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="input_email">E-mail</label></th>
+            <td><input required name="input_email" type="text" id="input_email" value="" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><button type="submit" class="button button-primary">Salve</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+</form>
+
+
+```
+
+- wp-content/plugins/custom-plugin/assets/js/script.js
+
+```js
+    $("#form_custom_add").validate({
+        submitHandler: function () {
+            //console.log($("#form_custom_add").serialize());
+            let post_data = $("#form_custom_add").serialize() + "&action=custom_plugin_library&param=post_form_data";
+            //console.log(post_data);
+
+            $.post(ajaxurl, post_data, function (response) {
+                let data = $.parseJSON(response);
+                console.log(data);
+                console.log("Name: " + data.input_name + "Email: " + data.input_email);
+
+            })
+
+        }
+    })
+```
+
 
 
 [Voltar ao Índice](#indice)

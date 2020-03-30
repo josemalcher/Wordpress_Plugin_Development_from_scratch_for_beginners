@@ -10,4 +10,9 @@ if(!empty($getParam)){
 		));
 		die;
 	}
+
+	if($getParam == "post_form_data"){
+		echo json_encode($_REQUEST);
+		die;
+	}
 }

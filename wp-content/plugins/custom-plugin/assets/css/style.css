@@ -1,3 +1,6 @@
 h1{
     color: #00a699;
 }
+#form_custom_add label.error{
+    color: red;
+}

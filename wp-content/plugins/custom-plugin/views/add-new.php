@@ -1,9 +1,22 @@
-<script
-	src="https://code.jquery.com/jquery-3.4.1.min.js"
-	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
-<?php
-echo "<h1>Add New</h1>";
+<h2>Form AJAX</h2>
+<hr>
+<form action="#" id="form_custom_add">
+    <table class="form-table">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="input_name">Name</label></th>
+            <td><input required name="input_name" type="text" id="input_name" value="" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="input_email">E-mail</label></th>
+            <td><input required name="input_email" type="text" id="input_email" value="" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><button type="submit" class="button button-primary">Salve</button></td>
+        </tr>
 
-?>
-<a href="#" class="button button-primary" id="btnClick">AJAX Click-me</a>
+        </tbody>
+    </table>
+</form>
+

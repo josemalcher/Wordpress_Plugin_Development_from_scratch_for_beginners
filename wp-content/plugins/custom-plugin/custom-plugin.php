@@ -60,6 +60,20 @@ function custon_plugin_assets() {
 	); // CSS file path
 
 	wp_enqueue_script(
+		"cpl_script_query",
+		PLUGIN_URL . "/custom-plugin/assets/js/jquery-3.4.1.min.js",
+		'',
+		"3.4.1",
+		true // in footer
+	);
+	wp_enqueue_script(
+		"cpl_script_validator_form",
+		PLUGIN_URL . "/custom-plugin/assets/js/jquery.validate.js",
+		'',
+		"1.19.1",
+		true // in footer
+	);
+	wp_enqueue_script(
 		"cpl_script",
 		PLUGIN_URL . "/custom-plugin/assets/js/script.js",
 		'',
