@@ -70,11 +70,11 @@ function custon_plugin_assets() {
 
 add_action( "init", "custon_plugin_assets" );
 
-function custom_plugin_tables(){
+function custom_plugin_tables() {
 	global $wpdb;
-	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-	if (count($wpdb->get_var('SHOW TABLES LIKE "wp_custom_plugin"')) == 0){
+	if ( count( $wpdb->get_var( 'SHOW TABLES LIKE "wp_custom_plugin"' ) ) == 0 ) {
 
 		$sql_query_to_create_table = "
 	CREATE TABLE `wp_custom_plugin` (
@@ -86,8 +86,23 @@ function custom_plugin_tables(){
      PRIMARY KEY (`id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1";
 
-		dbDelta($sql_query_to_create_table);
+		dbDelta( $sql_query_to_create_table );
 
 	}
 }
-register_activation_hook(__FILE__,'custom_plugin_tables');
+
+register_activation_hook( __FILE__, 'custom_plugin_tables' );
+
+// table deleting code
+function deactivate_table() {
+	// uninstall mysql code
+	global $wpdb;
+	$wpdb->query( "DROP table IF Exists wp_custom_plugin" );
+
+}
+
+//If we want to delete table while deactivates then we should use
+register_deactivation_hook( __FILE__, "deactivate_table" );
+
+// If we want to delete then we have to change action hook,
+//register_uninstall_hook( __FILE__, "deactivate_table" );

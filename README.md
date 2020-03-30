@@ -312,7 +312,23 @@ register_activation_hook(__FILE__,'custom_plugin_tables');
 
 ## <a name="parte9">9 - Drop Table when Plugin Uninstalls/Delete</a>
 
+```php
+register_activation_hook( __FILE__, 'custom_plugin_tables' );
 
+// table deleting code
+function deactivate_table() {
+	// uninstall mysql code
+	global $wpdb;
+	$wpdb->query( "DROP table IF Exists wp_custom_plugin" );
+
+}
+
+//If we want to delete table while deactivates then we should use
+register_deactivation_hook( __FILE__, "deactivate_table" );
+
+// If we want to delete then we have to change action hook,
+//register_uninstall_hook( __FILE__, "deactivate_table" );
+```
 
 [Voltar ao Índice](#indice)
 
