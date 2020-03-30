@@ -517,7 +517,18 @@ add_action("wo_ajax_custom_plugin_library", "add_custom_plugin_library_2");
 
 ## <a name="parte15">15 - About Wordpress global $wpdb Object</a>
 
+- https://codex.wordpress.org/Class_Reference/wpdb
 
+```
+$wpdb-query(" CUSTOM_QUERY FOR INSERT/UPDATE/DELETE ")
+  
+$wpdb-insert("TABLE_NAME","DATA")
+ 
+$wpdb-udpate("TABLE_NAME","DATA");
+  
+$wpdb-delete("TABLE_NAME","DATA");
+
+```
 
 [Voltar ao Índice](#indice)
 
