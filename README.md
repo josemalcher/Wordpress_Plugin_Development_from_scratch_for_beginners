@@ -277,6 +277,32 @@ add_action("init", "custon_plugin_assets");
 
 ## <a name="parte8">8 - Make Database Table on Plugin Activation</a>
 
+- https://developer.wordpress.org/reference/functions/register_activation_hook/
+
+```php
+
+function custom_plugin_tables(){
+	global $wpdb;
+	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+	if (count($wpdb->get_var('SHOW TABLES LIKE "wp_custom_plugin"')) == 0){
+
+		$sql_query_to_create_table = "
+	CREATE TABLE `wp_custom_plugin` (
+     `id` int(11) NOT NULL AUTO_INCREMENT,
+     `name` varchar(150) DEFAULT NULL,
+     `email` varchar(150) DEFAULT NULL,
+     `phone` varchar(150) DEFAULT NULL,
+     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=latin1";
+
+		dbDelta($sql_query_to_create_table);
+
+	}
+}
+register_activation_hook(__FILE__,'custom_plugin_tables');
+```
 
 
 [Voltar ao Índice](#indice)
