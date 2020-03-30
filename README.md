@@ -574,7 +574,53 @@ $wpdb->query(
 
 ## <a name="parte17">17 - Wordpress Update/Delete to Database</a>
 
+Steps to do Update data of Wordpress table:
 
+- 1: wpdb::update( string $table, array $data, array $where, array|string $format = null, array|string $where_format = null )
+- 2: wpdb::query and wpdb::prepare
+
+Steps to do Delete data from Wordpress table:
+
+- 1: wpdb::delete( string $table, array $where, array|string $where_format = null )
+- 2: wpdb::query and wpdb::prepare
+
+```php
+// Update
+/*
+    $wpdb->update(
+        "wp_custom_plugin",  // DB
+        array(
+                "email" => "updateemail@update.com" // COntains update values with colums name
+        ),
+        array(
+                "id"=> 2 // WHERE
+        )
+);
+
+$wpdb->query(
+	$wpdb->prepare(
+		"UPDATE wp_custom_plugin SET email = '%s' WHERE id = '%d'",
+		"prepareUPDATE@prepare.com.br",3
+	)
+);*/
+
+// DELETE Operation
+/*
+$wpdb->delete(
+        "wp_custom_plugin",
+        array(
+                "id"=>5
+        )
+);
+
+$wpdb->query(
+        $wpdb->prepare(
+                "DELETE FROM wp_custom_plugin WHERE id= %d", 6
+        )
+)
+*/
+
+```
 
 [Voltar ao Índice](#indice)
 

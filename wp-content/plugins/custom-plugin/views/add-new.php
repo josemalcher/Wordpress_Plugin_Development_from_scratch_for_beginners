@@ -5,7 +5,6 @@
 <?php
 //simple insert operation on page refresh
 global $wpdb;
-
 /*
 $wpdb->insert(
 	"wp_custom_plugin",
@@ -15,15 +14,47 @@ $wpdb->insert(
 		"phone" => "91980809922",
 	)
 )
-*/
-
-/*
 $wpdb->query(
 	$wpdb->prepare(
 		"  INSERT INTO wp_custom_plugin (name, email, phone) VALUES ('%s', '%s', '%s')",
 		"Jose Prepare", "jose@prepare.com.br","919988776"
 	)
 );
+*/
+
+// Update
+/*
+    $wpdb->update(
+        "wp_custom_plugin",  // DB
+        array(
+                "email" => "updateemail@update.com" // COntains update values with colums name
+        ),
+        array(
+                "id"=> 2 // WHERE
+        )
+);
+
+$wpdb->query(
+	$wpdb->prepare(
+		"UPDATE wp_custom_plugin SET email = '%s' WHERE id = '%d'",
+		"prepareUPDATE@prepare.com.br",3
+	)
+);*/
+
+// DELETE Operation
+/*
+$wpdb->delete(
+        "wp_custom_plugin",
+        array(
+                "id"=>5
+        )
+);
+
+$wpdb->query(
+        $wpdb->prepare(
+                "DELETE FROM wp_custom_plugin WHERE id= %d", 6
+        )
+)
 */
 
 ?>
