@@ -21,18 +21,18 @@ define( "PLUGIN_VERSION", "1.0" );
 
 function my_book_include_assets() {
 	//styles
-	wp_enqueue_style( "bootstrap", MY_BOOK_PLUGIN_URL . "/assets/css/bootstrap.min.css", '' );
-	wp_enqueue_style( "datatable", MY_BOOK_PLUGIN_URL . "/assets/css/jquery.dataTables.min.css", '' );
-	wp_enqueue_style( "notifybar", MY_BOOK_PLUGIN_URL . "/assets/css/jquery.notifyBar.css", '' );
-	wp_enqueue_style( "style", MY_BOOK_PLUGIN_URL     . "/assets/css/styles.css", '' );
+	//wp_enqueue_style( "bootstrap", MY_BOOK_PLUGIN_URL   . "/assets/css/bootstrap.min.css", '' );
+	wp_enqueue_style( "datatable", MY_BOOK_PLUGIN_URL   . "/assets/css/jquery.dataTables.min.css", '' );
+	wp_enqueue_style( "notifybar", MY_BOOK_PLUGIN_URL   . "/assets/css/jquery.notifyBar.css", '' );
+	wp_enqueue_style( "styles", MY_BOOK_PLUGIN_URL      . "/assets/css/styles.css", '' );
 
 	//scripts
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'bootstrap.min.js',   MY_BOOK_PLUGIN_URL . '/assets/js/bootstrap.min.js', '', true );
-	wp_enqueue_script( 'validation.min.js',  MY_BOOK_PLUGIN_URL . '/assets/js/jquery.validate.min.js', '', true );
-	wp_enqueue_script( 'datatable.min.js',   MY_BOOK_PLUGIN_URL . '/assets/js/jquery.dataTables.min.js', '', true );
-	wp_enqueue_script( 'jquery.notifyBar.js',MY_BOOK_PLUGIN_URL . '/assets/js/jquery.notifyBar.js', '', true );
-	wp_enqueue_script( 'script.js',          MY_BOOK_PLUGIN_URL . '/my-books/assets/js/scripts.js', '', true );
+	wp_enqueue_script( 'bootstrap.min.js',   MY_BOOK_PLUGIN_URL   . '/assets/js/bootstrap.min.js', '', true );
+	wp_enqueue_script( 'validation.min.js',  MY_BOOK_PLUGIN_URL   . '/assets/js/jquery.validate.min.js', '', true );
+	wp_enqueue_script( 'datatable.min.js',   MY_BOOK_PLUGIN_URL   . '/assets/js/jquery.dataTables.min.js', '', true );
+	wp_enqueue_script( 'jquery.notifyBar.js',MY_BOOK_PLUGIN_URL   . '/assets/js/jquery.notifyBar.js', '', true );
+	wp_enqueue_script( 'scripts.js',          MY_BOOK_PLUGIN_URL  . '/assets/js/scripts.js', '', true );
 
 	wp_localize_script( "script.js", "mybookajaxurl", admin_url( "admin-ajax.php" ) );
 }
