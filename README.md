@@ -761,7 +761,58 @@ add_shortcode("called_me_down", "customPluginFunctionTag");
 
 ## <a name="parte22">22 - Uploading from media library to plugin</a>
 
+- wp-content/plugins/custom-plugin/views/add-new.php
 
+```php
+wp_enqueue_media();
+```
+
+- wp-content/plugins/custom-plugin/assets/js/script.js
+
+```js
+/*
+    $("#btnImage").on("click", function () {
+        let images = wp.media({
+            title: "Upload Image",
+            multiple: true
+        }).open().on("select", function (e) {
+            //let uploadedImages = images.state().get("selection"); // very imagens/files
+            //let uploadedImages = images.state().get("selection").first(); // only // multile = false
+            let uploadedImages = images.state().get("selection");
+            let selectedImages = uploadedImages;
+            //console.log(uploadedImages.toJSON());
+            //console.log(selectedImages.url +" - " + selectedImages.title + " - " + selectedImages.filename);
+
+            /!*  // multiple images - multile  true
+            $.each(selectedImages, function (index, image) {
+                console.log("image URL: " + image.url + " Title "+ image.title);
+            })
+            *!/
+            selectedImages.map(function (image) {
+                let itemDetails = image.toJSON();
+                console.log(itemDetails);
+                // multiples files
+            });
+
+        })
+    });
+ */
+
+    $("#btnImage").on("click", function () {
+        let images = wp.media({
+            title: "Upload Image",
+            multiple: false
+        }).open().on("select", function (e) {
+            let uploadedImages = images.state().get("selection").first(); // only // multile = false
+            let selectedImages = uploadedImages.toJSON();
+
+            $("#getImages").attr("src", selectedImages.url);
+
+        })
+    });
+
+
+```
 
 [Voltar ao Índice](#indice)
 

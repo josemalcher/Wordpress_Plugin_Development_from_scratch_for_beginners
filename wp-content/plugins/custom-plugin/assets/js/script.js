@@ -26,14 +26,14 @@ $(function () {
     });
 
     // Outher ajax request
-   /* $("#form_custom_add_outherPage").on("click", function (e) {
-        e.preventDefault();
-        console.log("Open Anither Page has Opened");
-        console.log(ajaxurl);
-        $.post(ajaxurl, {action:"custom_plugin", name:"Online Web TUTOR", Tut:"WP Plugin Developer" }, function (response) {
-            console.log(response);
-        });
-    });*/
+    /* $("#form_custom_add_outherPage").on("click", function (e) {
+         e.preventDefault();
+         console.log("Open Anither Page has Opened");
+         console.log(ajaxurl);
+         $.post(ajaxurl, {action:"custom_plugin", name:"Online Web TUTOR", Tut:"WP Plugin Developer" }, function (response) {
+             console.log(response);
+         });
+     });*/
 
     $("#form_custom_add_outherPage").validate({
         submitHandler: function () {
@@ -48,5 +48,46 @@ $(function () {
 
         }
     });
+/*
+    $("#btnImage").on("click", function () {
+        let images = wp.media({
+            title: "Upload Image",
+            multiple: true
+        }).open().on("select", function (e) {
+            //let uploadedImages = images.state().get("selection"); // very imagens/files
+            //let uploadedImages = images.state().get("selection").first(); // only // multile = false
+            let uploadedImages = images.state().get("selection");
+            let selectedImages = uploadedImages;
+            //console.log(uploadedImages.toJSON());
+            //console.log(selectedImages.url +" - " + selectedImages.title + " - " + selectedImages.filename);
+
+            /!*  // multiple images - multile  true
+            $.each(selectedImages, function (index, image) {
+                console.log("image URL: " + image.url + " Title "+ image.title);
+            })
+            *!/
+            selectedImages.map(function (image) {
+                let itemDetails = image.toJSON();
+                console.log(itemDetails);
+                // multiples files
+            });
+
+        })
+    });
+ */
+
+    $("#btnImage").on("click", function () {
+        let images = wp.media({
+            title: "Upload Image",
+            multiple: false
+        }).open().on("select", function (e) {
+            let uploadedImages = images.state().get("selection").first(); // only // multile = false
+            let selectedImages = uploadedImages.toJSON();
+
+            $("#getImages").attr("src", selectedImages.url);
+
+        })
+    });
+
 
 });

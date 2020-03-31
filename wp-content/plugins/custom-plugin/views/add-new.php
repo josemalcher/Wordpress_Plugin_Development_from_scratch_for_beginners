@@ -56,7 +56,7 @@ $wpdb->query(
         )
 )
 */
-
+wp_enqueue_media();
 ?>
 
 
@@ -70,6 +70,18 @@ $wpdb->query(
         <tr>
             <th scope="row"><label for="input_email">E-mail</label></th>
             <td><input required name="input_email" type="text" id="input_email" value="" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th>Add File</th>
+            <td>
+                <input id="btnImage" type="button" value="Upload Image" class="button  button-small button-secondary"/>
+            </td>
+        </tr>
+        <tr>
+            <th>IMAGEM</th>
+            <td>
+                <img id="getImages" src="" alt="" style="width: 300px">
+            </td>
         </tr>
         <tr>
             <th></th>
