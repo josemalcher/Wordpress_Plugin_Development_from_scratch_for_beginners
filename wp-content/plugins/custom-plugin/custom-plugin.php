@@ -183,3 +183,10 @@ function create_page() {
 }
 
 register_activation_hook( __FILE__, "create_page" );
+
+
+add_action('wp_ajax_custom_plugin', 'prefix_ajax_custom_plugin');
+function prefix_ajax_custom_plugin(){
+	print_r($_REQUEST);
+	wp_die();
+}

@@ -629,6 +629,33 @@ $wpdb->query(
 
 ## <a name="parte18">18 - AJAX Request by Action hook Wordpress</a>
 
+- https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_(action)
+
+- wp-content/plugins/custom-plugin/custom-plugin.php
+
+```php
+add_action('wp_ajax_custom_plugin', 'prefix_ajax_custom_plugin');
+function prefix_ajax_custom_plugin(){
+	print_r($_REQUEST);
+	wp_die();
+}
+```
+
+- wp-content/plugins/custom-plugin/assets/js/script.js
+
+```js
+
+    // Outher ajax request
+    $("#form_custom_add_outherPage").on("click", function (e) {
+        e.preventDefault();
+        console.log("Open Anither Page has Opened");
+        console.log(ajaxurl);
+        $.post(ajaxurl, {action:"custom_plugin", name:"Online Web TUTOR", Tut:"WP Plugin Developer" }, function (response) {
+            console.log(response);
+        });
+    })
+
+```
 
 
 [Voltar ao Índice](#indice)

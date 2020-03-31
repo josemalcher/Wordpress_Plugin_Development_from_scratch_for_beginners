@@ -25,4 +25,14 @@ $(function () {
         }
     })
 
+    // Outher ajax request
+    $("#form_custom_add_outherPage").on("click", function (e) {
+        e.preventDefault();
+        console.log("Open Anither Page has Opened");
+        console.log(ajaxurl);
+        $.post(ajaxurl, {action:"custom_plugin", name:"Online Web TUTOR", Tut:"WP Plugin Developer" }, function (response) {
+            console.log(response);
+        });
+    })
+
 });
