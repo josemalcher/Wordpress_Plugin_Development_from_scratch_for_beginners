@@ -1,6 +1,6 @@
 <h2>AJAX</h2>
 <hr>
-
+<small><?=do_shortcode("[custom-plugin]")?></small>
 <?php
 
 ?>

@@ -195,3 +195,9 @@ function prefix_ajax_custom_ajax_req(){
 	echo json_encode($_REQUEST);
 	wp_die();
 }
+
+add_shortcode("custom-plugin", "customPluginFunction");
+function customPluginFunction(){
+	//echo "**** Olá short CODE! **** ";
+	include_once PLUGIN_DIR_PATH.'/views/shortcode-template.php';
+}

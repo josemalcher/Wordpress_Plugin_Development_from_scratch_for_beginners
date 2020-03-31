@@ -696,7 +696,17 @@ function prefix_ajax_custom_ajax_req(){
 
 ## <a name="parte20">20 - About Shortcodes Concept in Wordpress</a>
 
+```php
+add_shortcode("custom-plugin", "customPluginFunction");
+function customPluginFunction(){
+	//echo "**** Olá short CODE! **** ";
+	include_once PLUGIN_DIR_PATH.'/views/shortcode-template.php';
+}
+```
 
+```php
+<?=do_shortcode("[custom-plugin]")?>
+```
 
 [Voltar ao Índice](#indice)
 
