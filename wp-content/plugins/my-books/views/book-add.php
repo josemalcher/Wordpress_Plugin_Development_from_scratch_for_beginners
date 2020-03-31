@@ -1,5 +1,7 @@
 <?php
     wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL   . "/assets/css/bootstrap.min.css", '' );
+
+    wp_enqueue_media();
 ?>
 <h3>ADD Books</h3>
 <hr>
@@ -13,25 +15,27 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="name">Name:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Enter Name">
+                            <input required type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="author">Author:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="author" placeholder="Enter Author">
+                            <input required type="text" class="form-control" id="author" name="author" placeholder="Enter Author">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="about">About:</label>
                         <div class="col-sm-10">
-                            <textarea name="about" id="about" placeholder="Enter About"></textarea>
+                            <textarea required name="about" id="about" placeholder="Enter About"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="upload_img">Upload Image</label>
                         <div class="col-sm-10">
-                            <input type="button" id="upload_img" class="btn btn-info" value="Upload Image">
+                            <input type="button" id="btn_upload" class="btn btn-info" value="Upload Image">
+                            <span id="show-image"></span>
+                            <input type="hidden" id="image_name" name="image_name">
                         </div>
                     </div>
                     <div class="form-group">

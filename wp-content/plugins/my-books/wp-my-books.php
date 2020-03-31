@@ -58,8 +58,8 @@ function my_book_plugin_menus() {
 		"my_book_list" );
 	add_submenu_page(
 		"book-list",
-		"Book New",
-		"Book New",
+		"Add Book",
+		"Add Book",
 		"manage_options",
 		"book-new",
 		"my_book_add" );

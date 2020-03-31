@@ -1083,6 +1083,88 @@ register_deactivation_hook( __FILE__, "drop_table_plugin_books" );
 
 ## <a name="parte30">30 - "My Book" Plugin Validations/Media #7</a>
 
+- wp-content/plugins/my-books/assets/js/scripts.js
+
+```js
+
+    $("#frmAddBook").validate({
+        submitHandler: function () {
+            console.log($("#frmAddBook").serialize());
+        }
+    });
+    $("#frmEditBook").validate({
+        submitHandler: function () {
+            console.log($("#frmEditBook").serialize());
+        }
+    });
+    $("#btn_upload").on("click", function () {
+        let image = wp.media({
+            title: "Upload Image for My Book",
+            multiple: false
+        }).open().on("select", function () {
+            let uploaded_image = image.state().get("selection").first();
+            let getImage = uploaded_image.toJSON().url;
+            $("#show-image").html("<img src='" + getImage + "' style='height:'50px; width='50px' ' '>")
+            $("#image_name").val(getImage)
+        });
+    })
+
+```
+
+- wp-content/plugins/my-books/views/book-add.php
+
+```php
+<?php
+    wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL   . "/assets/css/bootstrap.min.css", '' );
+
+    wp_enqueue_media();
+?>
+<h3>ADD Books</h3>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="notice notice-success is-dismissible"><p>Success notice dismissible</p></div>
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Add books</div>
+            <div class="panel-body">
+                <form class="form-horizontal" action="javascript:void(0)" id="frmAddBook">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Name:</label>
+                        <div class="col-sm-10">
+                            <input required type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="author">Author:</label>
+                        <div class="col-sm-10">
+                            <input required type="text" class="form-control" id="author" name="author" placeholder="Enter Author">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="about">About:</label>
+                        <div class="col-sm-10">
+                            <textarea required name="about" id="about" placeholder="Enter About"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="upload_img">Upload Image</label>
+                        <div class="col-sm-10">
+                            <input type="button" id="btn_upload" class="btn btn-info" value="Upload Image">
+                            <span id="show-image"></span>
+                            <input type="hidden" id="image_name" name="image_name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+```
 
 
 [Voltar ao Índice](#indice)
