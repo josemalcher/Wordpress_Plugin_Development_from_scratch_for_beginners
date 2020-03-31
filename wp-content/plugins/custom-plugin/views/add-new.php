@@ -57,6 +57,13 @@ $wpdb->query(
 )
 */
 wp_enqueue_media();
+
+global $wpdb;
+$data = $wpdb->get_row(
+        $wpdb->prepare("SELECT * FROM wp_custom_plugin ORDER BY id desc LIMIT 1")
+);
+print_r($data)
+
 ?>
 
 
@@ -65,11 +72,11 @@ wp_enqueue_media();
         <tbody>
         <tr>
             <th scope="row"><label for="input_name">Name</label></th>
-            <td><input required name="input_name" type="text" id="input_name" value="" class="regular-text"></td>
+            <td><input required name="input_name" type="text" id="input_name" value="<?=$data->name?>" class="regular-text"></td>
         </tr>
         <tr>
             <th scope="row"><label for="input_email">E-mail</label></th>
-            <td><input required name="input_email" type="text" id="input_email" value="" class="regular-text"></td>
+            <td><input required name="input_email" type="text" id="input_email" value="<?=$data->email?> class="regular-text"></td>
         </tr>
         <tr>
             <th>Add File</th>
@@ -81,6 +88,12 @@ wp_enqueue_media();
             <th>IMAGEM</th>
             <td>
                 <img id="getImages" src="" alt="" style="width: 300px">
+            </td>
+        </tr>
+        <tr>
+            <th>Descriptions</th>
+            <td>
+                <?php wp_editor(html_entity_decode($data->description), "description_id"); ?>
             </td>
         </tr>
         <tr>

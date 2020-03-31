@@ -821,7 +821,98 @@ wp_enqueue_media();
 
 ## <a name="parte23">23 - Use of default wp_editor in Wordpress</a>
 
+```php
 
+global $wpdb;
+$data = $wpdb->get_row(
+        $wpdb->prepare("SELECT * FROM wp_custom_plugin ORDER BY id desc LIMIT 1")
+);
+print_r($data)
+
+?>
+
+
+<form action="#" id="form_custom_add">
+    <table class="form-table">
+        <tbody>
+        <tr>
+            <th scope="row"><label for="input_name">Name</label></th>
+            <td><input required name="input_name" type="text" id="input_name" value="<?=$data->name?>" class="regular-text"></td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="input_email">E-mail</label></th>
+            <td><input required name="input_email" type="text" id="input_email" value="<?=$data->email?> class="regular-text"></td>
+        </tr>
+        <tr>
+            <th>Add File</th>
+            <td>
+                <input id="btnImage" type="button" value="Upload Image" class="button  button-small button-secondary"/>
+            </td>
+        </tr>
+        <tr>
+            <th>IMAGEM</th>
+            <td>
+                <img id="getImages" src="" alt="" style="width: 300px">
+            </td>
+        </tr>
+        <tr>
+            <th>Descriptions</th>
+            <td>
+                <?php wp_editor(html_entity_decode($data->description), "description_id"); ?>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit" class="button button-primary">Salve</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</form>
+```
+
+```js
+   $("#form_custom_add").validate({
+        submitHandler: function () {
+            let name =  $("#input_name").val();
+            let email = $("#input_email").val();
+            let description = encodeURIComponent(tinyMCE.get("description_id").getContent());
+            let post_data = "action=custom_plugin_library" +
+                            "&param=savedata" +
+                            "&email="+email+
+                            "&name="+name+
+                            "&desc="+description;
+            $.post(ajaxurl, post_data, function (response) {
+                console.log(response);
+            })
+
+        }
+    });
+
+```
+
+```php
+
+	global $wpdb;
+	if($getParam == 'savedata'){
+		$name =  isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
+		$email = isset($_REQUEST['email']) ? $_REQUEST['email'] : '';
+		$desc =  isset($_REQUEST['desc']) ? htmlspecialchars($_REQUEST['desc']) : '';
+
+		$wpdb->insert(
+			$wpdb->prefix."custom_plugin",
+			array(
+				"name" => $name,
+				"email" => $email,
+				"description" => $desc,
+			));
+		echo json_encode(array("status"=> 1, "msg"=>"data saved"));
+
+	}
+
+```
 
 [Voltar ao Índice](#indice)
 

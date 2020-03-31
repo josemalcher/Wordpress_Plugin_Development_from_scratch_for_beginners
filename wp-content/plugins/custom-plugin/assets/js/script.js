@@ -9,7 +9,7 @@ $(function () {
         });
     })
 
-    $("#form_custom_add").validate({
+/*    $("#form_custom_add").validate({
         submitHandler: function () {
             //console.log($("#form_custom_add").serialize());
             let post_data = $("#form_custom_add").serialize() + "&action=custom_plugin_library&param=post_form_data";
@@ -23,7 +23,25 @@ $(function () {
             })
 
         }
+    });*/
+    $("#form_custom_add").validate({
+        submitHandler: function () {
+            let name =  $("#input_name").val();
+            let email = $("#input_email").val();
+            let description = encodeURIComponent(tinyMCE.get("description_id").getContent());
+            let post_data = "action=custom_plugin_library" +
+                            "&param=savedata" +
+                            "&email="+email+
+                            "&name="+name+
+                            "&desc="+description;
+            $.post(ajaxurl, post_data, function (response) {
+                console.log(response);
+            })
+
+        }
     });
+
+
 
     // Outher ajax request
     /* $("#form_custom_add_outherPage").on("click", function (e) {
@@ -88,6 +106,5 @@ $(function () {
 
         })
     });
-
 
 });
