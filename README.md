@@ -1072,7 +1072,9 @@ register_deactivation_hook( __FILE__, "drop_table_plugin_books" );
 
 ## <a name="parte29">29 - "My Book" Plugin Internal Pages #6</a>
 
-
+- wp-content/plugins/my-books/views/book-add.php
+- wp-content/plugins/my-books/views/book-list.php
+- wp-content/plugins/my-books/views/book-edit.php
 
 [Voltar ao Índice](#indice)
 

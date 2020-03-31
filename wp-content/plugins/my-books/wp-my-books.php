@@ -21,13 +21,14 @@ define( "PLUGIN_VERSION", "1.0" );
 
 function my_book_include_assets() {
 	//styles
-	//wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL   . "/assets/css/bootstrap.min.css", '' );
+//	wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL   . "/assets/css/bootstrap.min.css", '' );
 	wp_enqueue_style( "datatable", MY_BOOK_PLUGIN_URL . "/assets/css/jquery.dataTables.min.css", '' );
 	wp_enqueue_style( "notifybar", MY_BOOK_PLUGIN_URL . "/assets/css/jquery.notifyBar.css", '' );
 	wp_enqueue_style( "styles", MY_BOOK_PLUGIN_URL . "/assets/css/styles.css", '' );
 
 	//scripts
 	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'jquery.js', MY_BOOK_PLUGIN_URL . '/assets/js/jquery.js', '', true );
 	wp_enqueue_script( 'bootstrap.min.js', MY_BOOK_PLUGIN_URL . '/assets/js/bootstrap.min.js', '', true );
 	wp_enqueue_script( 'validation.min.js', MY_BOOK_PLUGIN_URL . '/assets/js/jquery.validate.min.js', '', true );
 	wp_enqueue_script( 'datatable.min.js', MY_BOOK_PLUGIN_URL . '/assets/js/jquery.dataTables.min.js', '', true );
@@ -57,11 +58,19 @@ function my_book_plugin_menus() {
 		"my_book_list" );
 	add_submenu_page(
 		"book-list",
-		"Add New",
-		"Add New",
+		"Book New",
+		"Book New",
 		"manage_options",
-		"add-new",
+		"book-new",
 		"my_book_add" );
+	add_submenu_page(
+		"book-list",
+		"",
+		"",
+		"manage_options",
+		"edit-book",
+		"my_book_update" );
+
 }
 
 add_action( "admin_menu", "my_book_plugin_menus" );
@@ -73,6 +82,9 @@ function my_book_list() {
 
 function my_book_add() {
 	include_once MY_BOOK_PLUGIN_DIR_PATH . '/views/book-add.php';
+}
+function my_book_update() {
+	include_once MY_BOOK_PLUGIN_DIR_PATH . '/views/book-edit.php';
 }
 
 function my_book_table() {
