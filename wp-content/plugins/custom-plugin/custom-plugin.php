@@ -101,6 +101,7 @@ if ( isset( $_REQUEST['action'] ) ) { // it checks the action param is set or no
 				global $wpdb;
 				include_once PLUGIN_DIR_PATH . "/library/custom-plugin-lib.php"; // ajax handler file within /library folder
 			}
+
 			break;
 	}
 }
@@ -185,19 +186,46 @@ function create_page() {
 register_activation_hook( __FILE__, "create_page" );
 
 
-add_action('wp_ajax_custom_plugin', 'prefix_ajax_custom_plugin');
-function prefix_ajax_custom_plugin(){
-	print_r($_REQUEST);
-	wp_die();
-}
-add_action('wp_ajax_custom_ajax_req', 'prefix_ajax_custom_ajax_req');
-function prefix_ajax_custom_ajax_req(){
-	echo json_encode($_REQUEST);
+add_action( 'wp_ajax_custom_plugin', 'prefix_ajax_custom_plugin' );
+function prefix_ajax_custom_plugin() {
+	print_r( $_REQUEST );
 	wp_die();
 }
 
-add_shortcode("custom-plugin", "customPluginFunction");
-function customPluginFunction(){
-	//echo "**** Olá short CODE! **** ";
-	include_once PLUGIN_DIR_PATH.'/views/shortcode-template.php';
+add_action( 'wp_ajax_custom_ajax_req', 'prefix_ajax_custom_ajax_req' );
+function prefix_ajax_custom_ajax_req() {
+	echo json_encode( $_REQUEST );
+	wp_die();
 }
+
+add_shortcode( "custom-plugin", "customPluginFunction" );
+function customPluginFunction() {
+	//echo "**** Olá short CODE! **** ";
+	include_once PLUGIN_DIR_PATH . '/views/shortcode-template.php';
+}
+
+add_shortcode( "custom-plugin-parameter", "customPluginFunctionParam" );
+function customPluginFunctionParam( $params ) {
+	$values = shortcode_atts(
+		array( // default values of params
+			"name"   => "WP - PLUGIN CUSTOM NAME",
+			"author" => "José Malcher"
+		),
+		$params, // dynamic params coming shortcode values
+		'custom-plugin-parameter' // optional parameter
+	);
+	echo "---- Name: " . $values['name'] . " e author: " . $values['author'] . " ----";
+} // [custom-plugin-parameter name='Curso WP Plugin' author='Sanjay Kumar']
+
+add_shortcode( 'tag-based', "customPluginFunctionTag" );
+function customPluginFunctionTag( $param, $content, $tag ) {
+	if ( $tag == "tag-based" ) {
+		echo "<h1>" . $content . "</h1>";
+	}
+
+	if ( $tag == "called_me_down"){
+		echo "This is another advance format od wp shortcode";
+	}
+
+} // [tag-based] Informações aqui [/tag-based]
+add_shortcode("called_me_down", "customPluginFunctionTag");

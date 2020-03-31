@@ -715,7 +715,44 @@ function customPluginFunction(){
 
 ## <a name="parte21">21 - Parameterized Shortcodes in Wordpress</a>
 
+```php
 
+add_shortcode( "custom-plugin-parameter", "customPluginFunctionParam" );
+function customPluginFunctionParam( $params ) {
+	$values = shortcode_atts(
+		array( // default values of params
+			"name"   => "WP - PLUGIN CUSTOM NAME",
+			"author" => "José Malcher"
+		),
+		$params, // dynamic params coming shortcode values
+		'custom-plugin-parameter' // optional parameter
+	);
+	echo "---- Name: " . $values['name'] . " e author: " . $values['author'] . " ----";
+} // [custom-plugin-parameter name='Curso WP Plugin' author='Sanjay Kumar']
+
+add_shortcode( 'tag-based', "customPluginFunctionTag" );
+function customPluginFunctionTag( $param, $content, $tag ) {
+	if ( $tag == "tag-based" ) {
+		echo "<h1>" . $content . "</h1>";
+	}
+
+	if ( $tag == "called_me_down"){
+		echo "This is another advance format od wp shortcode";
+	}
+
+} // [tag-based] Informações aqui [/tag-based]
+add_shortcode("called_me_down", "customPluginFunctionTag");
+```
+
+```
+[custom-plugin]
+
+[custom-plugin-parameter name='Curso WP Plugin' author='Sanjay Kumar']
+
+[tag-based] Shortcode com TAG [/tag-based]
+
+[called_me_down]
+```
 
 [Voltar ao Índice](#indice)
 
