@@ -23,16 +23,30 @@ $(function () {
             })
 
         }
-    })
+    });
 
     // Outher ajax request
-    $("#form_custom_add_outherPage").on("click", function (e) {
+   /* $("#form_custom_add_outherPage").on("click", function (e) {
         e.preventDefault();
         console.log("Open Anither Page has Opened");
         console.log(ajaxurl);
         $.post(ajaxurl, {action:"custom_plugin", name:"Online Web TUTOR", Tut:"WP Plugin Developer" }, function (response) {
             console.log(response);
         });
-    })
+    });*/
+
+    $("#form_custom_add_outherPage").validate({
+        submitHandler: function () {
+            let post_data = $("#form_custom_add_outherPage").serialize() + "&action=custom_ajax_req&param=post_form_data";
+            //console.log(post_data);
+            $.post(ajaxurl, post_data, function (response) {
+                let data = $.parseJSON(response);
+                console.log(data);
+                console.log("Name: " + data.input_name + "Email: " + data.input_email);
+
+            })
+
+        }
+    });
 
 });

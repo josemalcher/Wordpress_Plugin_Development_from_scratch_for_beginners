@@ -190,3 +190,8 @@ function prefix_ajax_custom_plugin(){
 	print_r($_REQUEST);
 	wp_die();
 }
+add_action('wp_ajax_custom_ajax_req', 'prefix_ajax_custom_ajax_req');
+function prefix_ajax_custom_ajax_req(){
+	echo json_encode($_REQUEST);
+	wp_die();
+}

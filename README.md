@@ -665,7 +665,29 @@ function prefix_ajax_custom_plugin(){
 
 ## <a name="parte19">19 - By wp_ajax_{action} Post Data to Server</a>
 
+```php
+add_action('wp_ajax_custom_ajax_req', 'prefix_ajax_custom_ajax_req');
+function prefix_ajax_custom_ajax_req(){
+	echo json_encode($_REQUEST);
+	wp_die();
+}
+```
 
+```js
+    $("#form_custom_add_outherPage").validate({
+        submitHandler: function () {
+            let post_data = $("#form_custom_add_outherPage").serialize() + "&action=custom_ajax_req&param=post_form_data";
+            //console.log(post_data);
+            $.post(ajaxurl, post_data, function (response) {
+                let data = $.parseJSON(response);
+                console.log(data);
+                console.log("Name: " + data.input_name + "Email: " + data.input_email);
+
+            })
+
+        }
+    });
+```
 
 [Voltar ao Índice](#indice)
 

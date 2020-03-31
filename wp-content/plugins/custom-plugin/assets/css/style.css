@@ -4,3 +4,6 @@ h1{
 #form_custom_add label.error{
     color: red;
 }
+#form_custom_add_outherPage label.error{
+    color: red;
+}
