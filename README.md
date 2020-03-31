@@ -1034,7 +1034,36 @@ function my_book_add() {
 
 ## <a name="parte28">28 - "My Book" Plugin Create/Drop Table #5</a>
 
+```php
 
+function my_book_table() {
+	global $wpdb;
+	return $wpdb->prefix . "my_books";
+}
+
+function my_book_generates_table_script() {
+	global $wpdb;
+	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	$sql = "  CREATE TABLE `" . my_book_table() . "` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) DEFAULT NULL,
+    `author` varchar(255) DEFAULT NULL,
+    `about` text,
+    `book_image` text,
+    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+	dbDelta( $sql );
+}
+register_activation_hook( __FILE__, "my_book_generates_table_script" );
+
+function drop_table_plugin_books() {
+	global $wpdb;
+	$wpdb->query( "DROP TABLE IF EXISTS " . my_book_table() );
+}
+register_deactivation_hook( __FILE__, "drop_table_plugin_books" );
+// register_uninstall_hook(__FILE__,"drop_table_plugin_books");
+```
 
 [Voltar ao Índice](#indice)
 
