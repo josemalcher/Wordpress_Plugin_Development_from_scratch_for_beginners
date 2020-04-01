@@ -69,7 +69,33 @@ $(document).ready(function () {
             $("#show-image").html("<img src='" + getImage + "' style='height: 50px; width: 50px' >")
             $("#image_name").val(getImage)
         });
-    })
+    });
+
+    $(".btnbookdelete").on("click", function () {
+        let conf = confirm("Tem certeza que você quer apagar o resgistro?");
+        if(conf){
+            let book_id = $(this).attr("data-id");
+            let postdata = "action=mybooklibrary" +
+                "&param=delete_book"+
+                "&id="+book_id;
+            console.log(postdata);
+            $.post(mybookajaxurl, postdata, function (response) {
+                //console.log(response);
+                let data = $.parseJSON(response);
+                if (data.status == 1) {
+                    // $.notifyBar({
+                    //     cssClass: "success",
+                    //     html: data.message
+                    // });
+                    setTimeout(function () {
+                        location.reload()
+                    }, 1000);
+                } else {
+
+                }
+            });
+        }
+    });
 
 
 });

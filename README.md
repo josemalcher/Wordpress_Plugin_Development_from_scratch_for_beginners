@@ -1405,6 +1405,52 @@ function my_book_ajax_handler(){
     });
 ```
 
+-
+
+- DELETE
+
+```js
+
+    $(".btnbookdelete").on("click", function () {
+        let conf = confirm("Tem certeza que você quer apagar o resgistro?");
+        if(conf){
+            let book_id = $(this).attr("data-id");
+            let postdata = "action=mybooklibrary" +
+                "&param=delete_book"+
+                "&id="+book_id;
+            console.log(postdata);
+            $.post(mybookajaxurl, postdata, function (response) {
+                //console.log(response);
+                let data = $.parseJSON(response);
+                if (data.status == 1) {
+                    // $.notifyBar({
+                    //     cssClass: "success",
+                    //     html: data.message
+                    // });
+                    setTimeout(function () {
+                        location.reload()
+                    }, 1000);
+                } else {
+
+                }
+            });
+        }
+    });
+```
+
+```php
+elseif ($_REQUEST['param'] == "delete_book"){
+		$wpdb->delete(
+			my_book_table(),
+			array(
+				"id" => $_REQUEST['id']
+			)
+		);
+		echo json_encode(array("status"=>1, "message"=>"Book DELETED successfully"));
+	}
+```
+
+
 [Voltar ao Índice](#indice)
 
 ---

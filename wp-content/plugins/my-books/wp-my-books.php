@@ -141,6 +141,14 @@ function my_book_ajax_handler(){
 			"id" => $_REQUEST['book_id']
 		));
 		echo json_encode(array("status"=>1, "message"=>"Book UPDATE successfully"));
+	}elseif ($_REQUEST['param'] == "delete_book"){
+		$wpdb->delete(
+			my_book_table(),
+			array(
+				"id" => $_REQUEST['id']
+			)
+		);
+		echo json_encode(array("status"=>1, "message"=>"Book DELETED successfully"));
 	}
 	wp_die();
 }
