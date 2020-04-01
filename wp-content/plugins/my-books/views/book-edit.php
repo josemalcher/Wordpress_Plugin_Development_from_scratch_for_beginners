@@ -1,5 +1,4 @@
 <?php
-wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL . "/assets/css/bootstrap.min.css", '' );
 
 wp_enqueue_media();
 global $wpdb;
