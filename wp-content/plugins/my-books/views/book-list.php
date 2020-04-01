@@ -47,8 +47,8 @@ $all_books = $wpdb->get_results(
                                 <td><?=$value['created_at'];?></td>
                                 <td><img src="<?=$value['book_image'];?>" style="width: 50px;height: 50px" alt="<?=$value['name'];?>"></td>
                                 <td>
-                                    <a class="btn btn-info" href="javascript:void(0)">Edit</a>
-                                    <a class="btn btn-danger" href="javascript:void(0)">Delete</a>
+                                    <a class="btn btn-info" href="admin.php?page=edit-book&edit=<?=$value['id'];?>">Edit</a>
+                                    <a class="btn btn-danger" href="#">Delete</a>
                                 </td>
                             </tr>
                     <?php

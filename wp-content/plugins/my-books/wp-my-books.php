@@ -131,6 +131,16 @@ function my_book_ajax_handler(){
 			)
 		);
 		echo json_encode(array("status"=>1, "message"=>"Book created successfully"));
+	}elseif ($_REQUEST['param'] == "edit_book"){
+		$wpdb->update(my_book_table(), array(
+			"name" => $_REQUEST['name'],
+			"author" => $_REQUEST['author'],
+			"about" => $_REQUEST['about'],
+			"book_image" => $_REQUEST['image_name']
+		), array(
+			"id" => $_REQUEST['book_id']
+		));
+		echo json_encode(array("status"=>1, "message"=>"Book UPDATE successfully"));
 	}
 	wp_die();
 }
