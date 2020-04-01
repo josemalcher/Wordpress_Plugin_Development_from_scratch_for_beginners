@@ -3,7 +3,27 @@ $(document).ready(function () {
 
     $("#frmAddBook").validate({
         submitHandler: function () {
-            console.log($("#frmAddBook").serialize());
+            let postdata = "action=mybooklibrary" +
+                            "&param=save_book" +
+                            "&"+$("#frmAddBook").serialize();
+            $.post(mybookajaxurl, postdata, function (response) {
+                //console.log(response);
+                let data = $.parseJSON(response);
+                if(data.status == 1){
+                    // $.notifyBar({
+                    //     cssClass: "success",
+                    //     html: data.message
+                    // });
+                    $("#message_save").removeAttr('hidden');
+                    $("#name").val("");
+                    $("#author").val("");
+                    $("#about").val("");
+                    $("#show-image").val("");
+                    $("#image_name").val("");
+                }else{
+
+                }
+            });
         }
     });
     $("#frmEditBook").validate({

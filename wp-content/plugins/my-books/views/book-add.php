@@ -7,7 +7,7 @@
 <hr>
 <div class="container">
     <div class="row">
-        <div class="notice notice-success is-dismissible"><p>Success notice dismissible</p></div>
+        <div id="message_save" hidden class="notice notice-success is-dismissible"><p>Salve with Success</p></div>
         <div class="panel panel-primary">
             <div class="panel panel-heading">Add books</div>
             <div class="panel-body">
