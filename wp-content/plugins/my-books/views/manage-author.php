@@ -1,7 +1,11 @@
 <?php
 
 global $wpdb;
-
+$getallAuthors = $wpdb->get_results(
+	$wpdb->prepare(
+		"SELECT * FROM " . my_authors_table() . " ORDER BY ID DESC", "" )
+);
+//print_r( $getallAuthors );
 ?>
 <h3>List of Author's</h3>
 <hr>
@@ -24,9 +28,26 @@ global $wpdb;
                     </tr>
                     </thead>
                     <tbody>
-
-
-
+					<?php
+					if ( count( $getallAuthors ) > 0 ) {
+						$i = 1;
+						foreach ( $getallAuthors as $key => $value ) {
+							?>
+                            <tr>
+                                <td><?php echo $i ++; ?></td>
+                                <td><?php echo $value->id; ?></td>
+                                <td><?php echo $value->name; ?></td>
+                                <td><?php echo $value->fb_link; ?></td>
+                                <td><?php echo $value->about; ?></td>
+                                <td> <?php echo $value->created_at; ?></td>
+                                <td>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+							<?php
+						}
+					}
+					?>
                     </tbody>
                     <tfoot>
                     <tr>

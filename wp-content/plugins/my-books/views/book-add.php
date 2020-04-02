@@ -1,6 +1,6 @@
 <?php
 
-    wp_enqueue_media();
+wp_enqueue_media();
 ?>
 <h3>ADD Books</h3>
 <hr>
@@ -14,22 +14,37 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="name">Name:</label>
                         <div class="col-sm-10">
-                            <input required type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                            <input required type="text" class="form-control" id="name" name="name"
+                                   placeholder="Enter Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="author">Author:</label>
                         <div class="col-sm-10">
-<!--                            <input required type="text" class="form-control" id="author" name="author" placeholder="Enter Author">-->
+                            <!--                            <input required type="text" class="form-control" id="author" name="author" placeholder="Enter Author">-->
                             <select name="author" id="author" class="form-control">
-                                <option value="-1" disabled selected > -- Select a Author --</option>
+                                <option value="-1" disabled selected> -- Select a Author --</option>
+								<?php
+								global $wpdb;
+								$getallAuthors = $wpdb->get_results(
+									$wpdb->prepare(
+										"SELECT * from " . my_authors_table() . " ORDER by id desc ", ""
+									)
+								);
+								foreach ( $getallAuthors as $index => $author ) {
+									?>
+                                    <option value="<?php echo $author->id; ?>"><?php echo $author->name; ?></option>
+									<?php
+								}
+								?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="about">About:</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" required name="about" id="about" placeholder="Enter About"></textarea>
+                            <textarea class="form-control" required name="about" id="about"
+                                      placeholder="Enter About"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

@@ -17,9 +17,9 @@ wp_enqueue_media();
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="author">Fb Link:</label>
+                        <label class="control-label col-sm-2" for="fb_link">Fb Link:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="link_author" name="link_author" placeholder="Facebook">
+                            <input type="text" class="form-control" id="fb_link" name="fb_link" placeholder="Facebook">
                         </div>
                     </div>
                     <div class="form-group">

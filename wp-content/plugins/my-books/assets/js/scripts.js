@@ -22,7 +22,7 @@ $(document).ready(function () {
                     // $("#image_name").val("");
                     setTimeout(function () {
                         location.reload()
-                    }, 3000);
+                    }, 1000);
                 } else {
 
                 }
@@ -51,7 +51,7 @@ $(document).ready(function () {
                     // $("#image_name").val("");
                     setTimeout(function () {
                         location.reload()
-                    }, 3000);
+                    }, 1000);
                 } else {
 
                 }
@@ -87,6 +87,25 @@ $(document).ready(function () {
                     //     cssClass: "success",
                     //     html: data.message
                     // });
+                    setTimeout(function () {
+                        location.reload()
+                    }, 1000);
+                } else {
+
+                }
+            });
+        }
+    });
+
+    $("#frm_add_author").validate({
+        submitHandler: function () {
+            let postdata = "action=mybooklibrary" +
+                            "&param=save_author" +
+                            "&" + $("#frm_add_author").serialize();
+            $.post(mybookajaxurl, postdata, function (response) {
+                let data = $.parseJSON(response);
+                if (data.status == 1) {
+                    $("#message_save").removeAttr('hidden');
                     setTimeout(function () {
                         location.reload()
                     }, 1000);
