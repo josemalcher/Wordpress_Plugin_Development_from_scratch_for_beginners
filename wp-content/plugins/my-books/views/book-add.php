@@ -20,13 +20,16 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="author">Author:</label>
                         <div class="col-sm-10">
-                            <input required type="text" class="form-control" id="author" name="author" placeholder="Enter Author">
+<!--                            <input required type="text" class="form-control" id="author" name="author" placeholder="Enter Author">-->
+                            <select name="author" id="author" class="form-control">
+                                <option value="-1" disabled selected > -- Select a Author --</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="about">About:</label>
                         <div class="col-sm-10">
-                            <textarea required name="about" id="about" placeholder="Enter About"></textarea>
+                            <textarea class="form-control" required name="about" id="about" placeholder="Enter About"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

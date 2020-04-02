@@ -1476,7 +1476,7 @@ elseif ($_REQUEST['param'] == "delete_book"){
 
 ## <a name="parte35">35 - "My Book" Extended: Building Layouts</a>
 
-
+- https://www.youtube.com/watch?v=VRoYHnFPXRA&list=PLT9miexWCpPUQkQwL-COHmo0Jd0qxLjTn&index=35
 
 [Voltar ao Índice](#indice)
 
