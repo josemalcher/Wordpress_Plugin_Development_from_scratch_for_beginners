@@ -250,6 +250,11 @@ function my_book_generates_table_script() {
             ) ENGINE=InnoDB DEFAULT CHARSET=latin1
      ";
 	dbDelta( $sql4 );
+
+	// User ROLE Registration
+	add_role("wp_book_user_key", "My Book user", array(
+		"read"=>true
+	));
 }
 
 register_activation_hook( __FILE__, "my_book_generates_table_script" );
@@ -261,15 +266,9 @@ function drop_table_plugin_books() {
 	$wpdb->query( "DROP TABLE IF EXISTS " . my_students_table() );
 	$wpdb->query( "DROP TABLE IF EXISTS " . my_enrol_table() );
 
-	//removing user_role
+	//removing user_role <----
 	if ( get_role( "wp_book_user_key" ) ) {
 		remove_role( "wp_book_user_key" );
-	}
-	//delete password
-	if ( ! empty( get_option( "my_book_page_id" ) ) ) {
-		$page_id = get_option( "my_book_page_id" );
-		wp_delete_post( $page_id, true ); //wp_posts
-		delete_option( "my_book_page_id" ); // wp_options
 	}
 
 }
@@ -281,46 +280,6 @@ register_deactivation_hook( __FILE__, "drop_table_plugin_books" );
 add_action( "wp_ajax_mybooklibrary", "my_book_ajax_handler" );
 function my_book_ajax_handler() {
 	global $wpdb;
-	if ( $_REQUEST['param'] == "save_book" ) {
-		//print_r($_REQUEST); // Save Data DB table
-		$wpdb->insert(
-			my_book_table(),
-			array(
-				"name"       => $_REQUEST['name'],
-				"author"     => $_REQUEST['author'],
-				"about"      => $_REQUEST['about'],
-				"book_image" => $_REQUEST['image_name'],
-			)
-		);
-		echo json_encode( array( "status" => 1, "message" => "Book created successfully" ) );
-	} elseif ( $_REQUEST['param'] == "edit_book" ) {
-		$wpdb->update( my_book_table(), array(
-			"name"       => $_REQUEST['name'],
-			"author"     => $_REQUEST['author'],
-			"about"      => $_REQUEST['about'],
-			"book_image" => $_REQUEST['image_name']
-		), array(
-			"id" => $_REQUEST['book_id']
-		) );
-		echo json_encode( array( "status" => 1, "message" => "Book UPDATE successfully" ) );
-	} elseif ( $_REQUEST['param'] == "delete_book" ) {
-		$wpdb->delete(
-			my_book_table(),
-			array(
-				"id" => $_REQUEST['id']
-			)
-		);
-		echo json_encode( array( "status" => 1, "message" => "Book DELETED successfully" ) );
-	} elseif ( $_REQUEST['param'] == "save_author" ) {
-		$wpdb->insert(
-			my_authors_table(),
-			array(
-				"name"       => $_REQUEST['name'],
-				"fb_link"     => $_REQUEST['fb_link'],
-				"about"      => $_REQUEST['about'],
-			)
-		);
-		echo json_encode( array( "status" => 1, "message" => "Author add successfully" ) );
-	}
+	include_once MY_BOOK_PLUGIN_DIR_PATH . "/library/my_booklibrary.php";
 	wp_die();
 }

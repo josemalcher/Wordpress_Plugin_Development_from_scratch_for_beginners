@@ -2,7 +2,12 @@
 
 global $wpdb;
 
-
+$allstudents = $wpdb->get_results(
+	$wpdb->prepare(
+		"SELECT * FROM " . my_students_table() . " ORDER BY ID DESC "
+	)
+);
+print_r( $allstudents )
 
 ?>
 <h3>List of Student's</h3>
@@ -27,7 +32,29 @@ global $wpdb;
                     </thead>
                     <tbody>
 
+					<?php
 
+					if ( count( $allstudents ) > 0 ) {
+						$i = 1;
+						foreach ( $allstudents as $key => $value ) {
+							$userdetails = get_userdata( $value->user_login_id ); //wp function
+							?>
+                            <tr>
+                                <td><?php echo $i ++; ?></td>
+                                <td><?php echo $value->id; ?></td>
+                                <td><?php echo $value->name; ?></td>
+                                <td><?php echo $value->email; ?></td>
+                                <td><?php echo $userdetails->user_login; ?></td>
+                                <td><?php echo $value->created_at; ?></td>
+                                <td>
+                                    <button class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+							<?php
+						}
+
+					}
+					?>
 
                     </tbody>
                     <tfoot>

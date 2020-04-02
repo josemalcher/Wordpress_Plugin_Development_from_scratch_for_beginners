@@ -116,5 +116,24 @@ $(document).ready(function () {
         }
     });
 
+    $("#frm_Add_Student").validate({
+        submitHandler: function () {
+            let postdata = "action=mybooklibrary" +
+                "&param=save_student" +
+                "&" + $("#frm_Add_Student").serialize();
+            $.post(mybookajaxurl, postdata, function (response) {
+                let data = $.parseJSON(response);
+                if (data.status == 1) {
+                    $("#message_save").removeAttr('hidden');
+                    setTimeout(function () {
+                        location.reload()
+                    }, 1000);
+                } else {
+
+                }
+            });
+        }
+    });
+
 
 });
