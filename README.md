@@ -1503,7 +1503,7 @@ elseif ($_REQUEST['param'] == "delete_book"){
 
 ## <a name="parte38">38 - Front-end page of plugin to list books</a>
 
-
+- https://www.youtube.com/watch?v=JN9HCW2KVyQ&list=PLT9miexWCpPUQkQwL-COHmo0Jd0qxLjTn&index=38
 
 [Voltar ao Índice](#indice)
 

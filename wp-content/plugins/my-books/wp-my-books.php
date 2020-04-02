@@ -255,9 +255,33 @@ function my_book_generates_table_script() {
 	add_role("wp_book_user_key", "My Book user", array(
 		"read"=>true
 	));
+
+	/* dynamic page creation code- listing of created books*/
+	// Create post object
+	$my_post = array(
+		'post_title'    => "Book Page",
+		'post_content'  => "[book_page]", //shortcode
+		'post_status'   => 'publish',
+		"post_type" =>"page",
+		"post_name" => "my_book"
+	);
+
+	// Insert the post into the database
+	$book_id = wp_insert_post( $my_post );
+	add_option("my_book_page_id",$book_id);
+
 }
 
 register_activation_hook( __FILE__, "my_book_generates_table_script" );
+
+
+function my_book_page_functions(){
+	echo "This is my booook page content";
+}
+
+add_shortcode("book_page","my_book_page_functions");
+
+
 
 function drop_table_plugin_books() {
 	global $wpdb;
@@ -270,6 +294,14 @@ function drop_table_plugin_books() {
 	if ( get_role( "wp_book_user_key" ) ) {
 		remove_role( "wp_book_user_key" );
 	}
+
+	//delete password
+	if(!empty(get_option("my_book_page_id"))){
+		$page_id = get_option("my_book_page_id");
+		wp_delete_post($page_id, true); //wp_posts
+		delete_option ("my_book_page_id"); // wp_options
+	}
+
 
 }
 
