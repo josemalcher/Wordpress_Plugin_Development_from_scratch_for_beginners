@@ -1532,7 +1532,9 @@ elseif ($_REQUEST['param'] == "delete_book"){
 
 ## <a name="parte41">41 - Login and Logout Filter hooks Wordpress</a>
 
+- https://www.youtube.com/watch?v=StmVf5sXGlA&list=PLT9miexWCpPUQkQwL-COHmo0Jd0qxLjTn&index=41
 
+Até o momento, o curso termina aqui!
 
 [Voltar ao Índice](#indice)
 

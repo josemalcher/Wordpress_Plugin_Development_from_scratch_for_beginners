@@ -135,5 +135,10 @@ $(document).ready(function () {
         }
     });
 
+    // Enrol Code
+    jQuery(document).on("click",".owt-enrol-btn",function(){
+        console.log("Enrolled Successfully");
+    });
+
 
 });
