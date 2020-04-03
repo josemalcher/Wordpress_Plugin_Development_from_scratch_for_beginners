@@ -35,8 +35,8 @@ function my_book_include_assets() {
 	wp_enqueue_script( 'scripts.js', MY_BOOK_PLUGIN_URL . '/assets/js/scripts.js', '', true );
 	wp_localize_script( "scripts.js", "mybookajaxurl", admin_url( "admin-ajax.php" ) );
 }*/
-
 function my_book_include_assets() {
+
 	$slug           = '';
 	$pages_includes = array(
 		"book-list",
@@ -47,11 +47,26 @@ function my_book_include_assets() {
 		"remove-author",
 		"add-student",
 		"remove-student",
-		"course-tracker"
+		"course-tracker",
+		"frontendpage",
 	);
-	$currentPage    = $_GET['page'];
+
+	$currentPage = $_GET['page'];
+
+//$_SERVER[REQUEST_URI]
+///$_SERVER[HTTP_HOST]: http://, https://
+
+	if ( empty( $currentPage ) ) {
+		$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+		if ( preg_match( "/my_book/", $actual_link ) ) {
+			$currentPage = "frontendpage";
+		}
+	}
+
 	if ( in_array( $currentPage, $pages_includes ) ) {
-		wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL   . "/assets/css/bootstrap.min.css", '' );
+
+		wp_enqueue_style( "bootstrap_my_books", MY_BOOK_PLUGIN_URL . "/assets/css/bootstrap.min.css", '' );
 		wp_enqueue_style( "datatable", MY_BOOK_PLUGIN_URL . "/assets/css/jquery.dataTables.min.css", '' );
 		wp_enqueue_style( "notifybar", MY_BOOK_PLUGIN_URL . "/assets/css/jquery.notifyBar.css", '' );
 		wp_enqueue_style( "styles", MY_BOOK_PLUGIN_URL . "/assets/css/styles.css", '' );
@@ -66,8 +81,10 @@ function my_book_include_assets() {
 		wp_enqueue_script( 'scripts.js', MY_BOOK_PLUGIN_URL . '/assets/js/scripts.js', '', true );
 
 		wp_localize_script( "scripts.js", "mybookajaxurl", admin_url( "admin-ajax.php" ) );
+
 	}
 }
+
 
 add_action( "init", "my_book_include_assets" );
 
@@ -252,35 +269,35 @@ function my_book_generates_table_script() {
 	dbDelta( $sql4 );
 
 	// User ROLE Registration
-	add_role("wp_book_user_key", "My Book user", array(
-		"read"=>true
-	));
+	add_role( "wp_book_user_key", "My Book user", array(
+		"read" => true
+	) );
 
 	/* dynamic page creation code- listing of created books*/
 	// Create post object
 	$my_post = array(
-		'post_title'    => "Book Page",
-		'post_content'  => "[book_page]", //shortcode
-		'post_status'   => 'publish',
-		"post_type" =>"page",
-		"post_name" => "my_book"
+		'post_title'   => "Book Page",
+		'post_content' => "[book_page]", //shortcode
+		'post_status'  => 'publish',
+		"post_type"    => "page",
+		"post_name"    => "my_book"
 	);
 
 	// Insert the post into the database
 	$book_id = wp_insert_post( $my_post );
-	add_option("my_book_page_id",$book_id);
+	add_option( "my_book_page_id", $book_id );
 
 }
 
 register_activation_hook( __FILE__, "my_book_generates_table_script" );
 
 
-function my_book_page_functions(){
-	echo "This is my booook page content";
+function my_book_page_functions() {
+	//echo "This is my booook page content";
+	include_once MY_BOOK_PLUGIN_DIR_PATH . "/views/my_books_frontend_lists.php";
 }
 
-add_shortcode("book_page","my_book_page_functions");
-
+add_shortcode( "book_page", "my_book_page_functions" );
 
 
 function drop_table_plugin_books() {
@@ -296,10 +313,10 @@ function drop_table_plugin_books() {
 	}
 
 	//delete password
-	if(!empty(get_option("my_book_page_id"))){
-		$page_id = get_option("my_book_page_id");
-		wp_delete_post($page_id, true); //wp_posts
-		delete_option ("my_book_page_id"); // wp_options
+	if ( ! empty( get_option( "my_book_page_id" ) ) ) {
+		$page_id = get_option( "my_book_page_id" );
+		wp_delete_post( $page_id, true ); //wp_posts
+		delete_option( "my_book_page_id" ); // wp_options
 	}
 
 
@@ -314,4 +331,29 @@ function my_book_ajax_handler() {
 	global $wpdb;
 	include_once MY_BOOK_PLUGIN_DIR_PATH . "/library/my_booklibrary.php";
 	wp_die();
+}
+
+add_action( "page_template", "owt_custom_page_layout" );
+function owt_custom_page_layout( $page_template ) {
+	global $post;
+	$page_template = $post->post_name; // book page slug
+	if ( $page_template == "my_book" ) {
+		$page_template = MY_BOOK_PLUGIN_DIR_PATH . "/views/frontend-books-template.php";
+	}
+
+	return $page_template;
+}
+
+function get_author_details( $author_id ) {
+	global $wpdb;
+	$author_details = $wpdb->get_row(
+
+		$wpdb->prepare(
+
+			"SELECT * from " . my_authors_table() . " WHERE id = %d", $author_id
+
+		), ARRAY_A
+	);
+
+	return $author_details;
 }
